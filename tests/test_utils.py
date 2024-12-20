@@ -1,6 +1,5 @@
 import itertools
 import numpy as np
-from six.moves import xrange
 
 from dtcwt.utils import *
 
@@ -37,7 +36,7 @@ def test_stacked_2d_matrix_vector_product():
     assert out.shape == (nr, nc, mr)
 
     # Check each product
-    for r, c in itertools.product(xrange(nr), xrange(nc)):
+    for r, c in itertools.product(range(nr), range(nc)):
         m = matrices[r, c, :, :]
         v = vectors[r, c, :]
         o = out[r, c, :]
@@ -65,7 +64,7 @@ def test_stacked_2d_vector_matrix_product():
     assert out.shape == (nr, nc, mc)
 
     # Check each product
-    for r, c in itertools.product(xrange(nr), xrange(nc)):
+    for r, c in itertools.product(range(nr), range(nc)):
         m = matrices[r, c, :, :]
         v = vectors[r, c, :]
         o = out[r, c, :]
@@ -93,7 +92,7 @@ def test_stacked_2d_matrix_matrix_product():
     assert out.shape == (nr, nc, mr1, mc2)
 
     # Check each product
-    for r, c in itertools.product(xrange(nr), xrange(nc)):
+    for r, c in itertools.product(range(nr), range(nc)):
         m1 = matrices1[r, c, :, :]
         m2 = matrices2[r, c, :, :]
         o = out[r, c, :, :]

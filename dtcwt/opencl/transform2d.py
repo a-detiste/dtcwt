@@ -1,8 +1,5 @@
-from __future__ import division, absolute_import
-
 import logging
 import numpy as np
-from six.moves import xrange
 
 from dtcwt.coeffs import biort as _biort, qshift as _qshift
 from dtcwt.defaults import DEFAULT_BIORT, DEFAULT_QSHIFT
@@ -27,7 +24,7 @@ def dtwavexfm2(X, nlevels=3, biort=DEFAULT_BIORT, qshift=DEFAULT_QSHIFT, include
     else:
         return r.lowpass, r.highpasses
 
-class Pyramid(object):
+class Pyramid:
     """
     An interface-compatible version of
     :py:class:`dtcwt.Pyramid` where the initialiser
@@ -223,7 +220,7 @@ class Transform2d(Transform2dNumPy):
             if include_scale:
                 Yscale[0] = LoLo
 
-        for level in xrange(1, nlevels):
+        for level in range(1, nlevels):
             row_size, col_size = LoLo.shape
 
             if row_size % 4 != 0:

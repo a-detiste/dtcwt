@@ -28,7 +28,7 @@ import tables
 # Parse command line options
 OPTS = docopt(__doc__)
 
-class VideoReader(object):
+class VideoReader:
     def __init__(self, filename, groupsize=None):
         self._vc = cv2.VideoCapture(filename)
         self._last_frame = None
@@ -46,7 +46,7 @@ class VideoReader(object):
         if self._last_frame is not None:
             frames.append((self._last_frame_idx, self._last_frame))
 
-        for it in xrange(self.groupsize):
+        for it in range(self.groupsize):
             success, f = self._vc.read()
             if not success:
                 break
@@ -130,7 +130,7 @@ def main():
 
             # Read frames for next work group
             groups = []
-            for group in xrange(size):
+            for group in range(size):
                 gof = v.read_next_gof()
                 groups.append((group_idx, gof))
                 group_idx += 1

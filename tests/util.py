@@ -6,8 +6,6 @@ from dtcwt.opencl.lowlevel import _HAVE_CL as HAVE_CL
 #  from dtcwt.utils import _HAVE_TF as HAVE_TF
 from dtcwt.tf.lowlevel import _HAVE_TF as HAVE_TF
 
-from six.moves import xrange
-
 TOLERANCE = 1e-6
 
 def assert_almost_equal(a, b, tolerance=TOLERANCE):
@@ -41,7 +39,7 @@ def _mean(a, axis=None, *args, **kwargs):
 def centre_indices(ndim=2,apron=8):
     """Returns the centre indices for the correct number of dimension
     """
-    return tuple([slice(apron,-apron) for i in xrange(ndim)])
+    return tuple([slice(apron,-apron) for i in range(ndim)])
 
 def summarise_mat(M, apron=8):
     """HACK to provide a 'summary' matrix consisting of the corners of the
@@ -63,7 +61,7 @@ def summarise_cube(M, apron=4):
     """Provide a summary cube, extending  summarise_mat to 3D
     """
     return np.dstack(
-        [summarise_mat(M[:,:,i,...], apron) for i in xrange(M.shape[-2])]
+        [summarise_mat(M[:,:,i,...], apron) for i in range(M.shape[-2])]
     )
 
 skip_if_no_cl = pytest.mark.skipif(not HAVE_CL, reason="OpenCL not present")

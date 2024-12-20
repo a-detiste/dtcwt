@@ -1,8 +1,6 @@
-from __future__ import absolute_import
-
 from dtcwt.utils import asfarray
 
-class Pyramid(object):
+class Pyramid:
     """A representation of a transform domain signal.
 
     Backends are free to implement any class which respects this interface for

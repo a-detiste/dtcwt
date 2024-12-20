@@ -7,11 +7,8 @@ This module implements function for DTCWT-based image registration as outlined i
 These functions are 2D-only for the moment.
 
 """
-from __future__ import division, absolute_import
 
 import itertools
-
-from six.moves import xrange
 
 import dtcwt
 import dtcwt.numpy
@@ -168,7 +165,7 @@ def qtildematrices(t_ref, t_target, levels):
                              np.arange(0,1,1/highpasses1.shape[0]))
 
         Qt_mat_sum = None
-        for subband in xrange(highpasses1.shape[2]):
+        for subband in range(highpasses1.shape[2]):
             C_d = confidence(highpasses1[:,:,subband], highpasses2[:,:,subband])
             dy, dx, dt = phasegradient(highpasses1[:,:,subband], highpasses2[:,:,subband],
                                             EXPECTED_SHIFTS[subband,:])
@@ -194,7 +191,7 @@ def qtildematrices(t_ref, t_target, levels):
                 elem_idx += 1
 
             # q sub-vector
-            for r in xrange(6):
+            for r in range(6):
                 Qt[:,:,elem_idx] = tmp[r] * tmp[6]
                 elem_idx += 1
 
@@ -243,7 +240,7 @@ def solvetransform(Qtilde_vec):
     except np.linalg.LinAlgError:
         # Try the slower fallback
         rv = np.zeros(Qtilde_vec.shape[:-1] + (6,))
-        for idx in itertools.product(*list(xrange(s) for s in Qtilde_vec.shape[:-1])):
+        for idx in itertools.product(*list(range(s) for s in Qtilde_vec.shape[:-1])):
             rv[idx] = np.linalg.solve(Q[idx], -q[idx])
 
     return rv
@@ -335,7 +332,7 @@ def estimatereg(source, reference, regshape=None, levels=None):
 
     if levels is None:
         levels = []
-        levels.append(list(x for x in xrange(nlevels-1, nlevels-3, -1) if x>=0))
+        levels.append(list(x for x in range(nlevels-1, nlevels-3, -1) if x>=0))
         for s in np.arange(nlevels-1, 0, -0.5):
             refine_levels = list(int(np.floor(s))-x for x in range(2) if s-x >= 2)
             if len(refine_levels) < 2:
@@ -350,7 +347,7 @@ def estimatereg(source, reference, regshape=None, levels=None):
     Qt = np.sum(Qt_mats, axis=0)
 
     a = solvetransform(Qt)
-    for idx in xrange(a.shape[0]):
+    for idx in range(a.shape[0]):
         avecs[:,:,idx] = a[idx]
 
     # Refine estimate
@@ -429,11 +426,11 @@ def _boxfilter(X, kernel_size):
     if kernel_size % 2 == 0:
         raise ValueError('Kernel size must be odd')
 
-    for axis_idx in xrange(2):
+    for axis_idx in range(2):
         slices = [slice(None),] * len(X.shape)
         out = X
 
-        for delta in xrange(1, 1+(kernel_size-1)//2):
+        for delta in range(1, 1+(kernel_size-1)//2):
             slices[axis_idx] = dtcwt.utils.reflect(
                     np.arange(X.shape[axis_idx]) + delta, -0.5, X.shape[axis_idx]-0.5)
             out = out + X[slices]

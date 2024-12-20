@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 try:
     import tensorflow as tf
     _HAVE_TF = True

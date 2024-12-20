@@ -28,14 +28,13 @@ setup(
     classifiers=[
         "Development Status :: 3 - Alpha",
         "License :: Free To Use But Restricted",
-        "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3",
     ],
     package_data = {
         'dtcwt': ['data/*.npz',],
     },
 
-    install_requires=[ 'numpy<2.0.0', 'scipy', 'six', ],
+    install_requires=[ 'numpy<2.0.0', 'scipy' ],
 
     extras_require={
         'docs': [ 'sphinx', 'docutils', 'matplotlib', 'ipython', ],

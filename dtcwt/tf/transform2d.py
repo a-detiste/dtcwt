@@ -1,9 +1,5 @@
-from __future__ import absolute_import
-
 import numpy as np
 import logging
-
-from six.moves import xrange
 
 from dtcwt.coeffs import biort as _biort, qshift as _qshift
 from dtcwt.defaults import DEFAULT_BIORT, DEFAULT_QSHIFT
@@ -37,7 +33,7 @@ np_dtypes = frozenset(
 )
 
 
-class Transform2d(object):
+class Transform2d:
     """
     An implementation of the 2D DT-CWT via Tensorflow.
 
@@ -695,7 +691,7 @@ class Transform2d(object):
 
         # ############################ Level 2+ ################################
         # Uses the qshift filters
-        for level in xrange(1, nlevels):
+        for level in range(1, nlevels):
             row_size, col_size = LoLo_shape[0], LoLo_shape[1]
             # If the row count of LoLo is not divisible by 4 (it will be
             # divisible by 2), add 2 extra rows to make it so

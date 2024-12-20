@@ -53,7 +53,7 @@ def _update_from_current_backend():
         setattr(dtcwt, k, v)
     dtcwt.backend_name = _BACKEND_STACK[-1][0]
 
-class _BackendGuard(object):
+class _BackendGuard:
     def __init__(self, stack):
         # Explicitly copy the stack
         self._stack = list(stack)

@@ -6,8 +6,6 @@ This script demonstrates some methods for image registration using the DTCWT.
 
 """
 
-from __future__ import division, print_function
-
 import itertools
 import logging
 import os

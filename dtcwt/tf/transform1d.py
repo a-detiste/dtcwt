@@ -1,8 +1,4 @@
-from __future__ import absolute_import
-
 import numpy as np
-
-from six.moves import xrange
 
 from dtcwt.coeffs import biort as _biort, qshift as _qshift
 from dtcwt.defaults import DEFAULT_BIORT, DEFAULT_QSHIFT
@@ -35,7 +31,7 @@ np_dtypes = frozenset(
 )
 
 
-class Transform1d(object):
+class Transform1d:
     """
     An implementation of the 1D DT-CWT in Tensorflow.
 
@@ -433,7 +429,7 @@ class Transform1d(object):
 
         # ############################ Level 2+ ################################
         # Uses the qshift filters
-        for level in xrange(1, nlevels):
+        for level in range(1, nlevels):
             # If the row count of Lo is not divisible by 4 (it will be
             # divisible by 2), add 2 extra rows to make it so
             if Lo.get_shape().as_list()[1] % 4 != 0:

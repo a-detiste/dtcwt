@@ -1,5 +1,3 @@
-from __future__ import division, absolute_import
-
 # Wrap importing of pyopencl in a try/except block since it is not an error to
 # not have OpenCL installed when using dtcwt.
 try:
@@ -13,7 +11,6 @@ class NoCLPresentError(RuntimeError):
     pass
 
 import numpy as np
-from six.moves import xrange
 import struct
 
 from dtcwt.utils import asfarray, as_column_vector, memoize

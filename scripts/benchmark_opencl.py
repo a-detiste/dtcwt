@@ -4,8 +4,6 @@ CPU ones.
 
 """
 
-from __future__ import print_function, division
-
 import os
 import timeit
 

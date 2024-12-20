@@ -1,9 +1,6 @@
-from __future__ import absolute_import, division
-
 __all__ = [ 'colfilter', 'colifilt', 'coldfilt', ]
 
 import numpy as np
-from six.moves import xrange
 from dtcwt.utils import as_column_vector, asfarray, appropriate_complex_type_for, reflect
 
 def _centered(arr, newsize):
@@ -37,7 +34,7 @@ def _column_convolve(X, h):
     Xshape[0] = full_size
 
     out = np.zeros(Xshape, dtype=X.dtype)
-    for idx in xrange(h_size):
+    for idx in range(h_size):
         out[idx:(idx+X.shape[0]),...] += X * h[idx]
 
     outShape = Xshape.copy()

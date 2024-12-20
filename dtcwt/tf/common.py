@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 try:
     import tensorflow as tf
 except ImportError:
@@ -7,7 +5,7 @@ except ImportError:
     pass
 
 
-class Pyramid(object):
+class Pyramid:
     """A tensorflow representation of a transform domain signal.
 
     An interface-compatible version of

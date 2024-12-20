@@ -3,8 +3,6 @@ Convenience functions for plotting DTCWT-related objects.
 
 """
 
-from __future__ import absolute_import
-
 import numpy as np
 from matplotlib.pyplot import *
 

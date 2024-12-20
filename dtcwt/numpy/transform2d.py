@@ -1,9 +1,5 @@
-from __future__ import absolute_import
-
 import numpy as np
 import logging
-
-from six.moves import xrange
 
 from dtcwt.coeffs import biort as _biort, qshift as _qshift
 from dtcwt.defaults import DEFAULT_BIORT, DEFAULT_QSHIFT
@@ -12,7 +8,7 @@ from dtcwt.utils import appropriate_complex_type_for, asfarray
 from dtcwt.numpy.common import Pyramid
 from dtcwt.numpy.lowlevel import *
 
-class Transform2d(object):
+class Transform2d:
     """
     An implementation of the 2D DT-CWT via NumPy. *biort* and *qshift* are the
     wavelets which parameterise the transform.
@@ -129,7 +125,7 @@ class Transform2d(object):
             if include_scale:
                 Yscale[0] = LoLo
 
-        for level in xrange(1, nlevels):
+        for level in range(1, nlevels):
             row_size, col_size = LoLo.shape
             if row_size % 4 != 0:
                 # Extend by 2 rows if no. of rows of LoLo are not divisable by 4

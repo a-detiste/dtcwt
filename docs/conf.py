@@ -11,9 +11,8 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+import configparser
 import sys, os
-
-from six.moves import configparser
 
 # Load this project's setup.cfg
 setup_cfg = configparser.ConfigParser()
@@ -66,7 +65,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-copyright = u'2013, 2014, Rich Wareham, Nick Kingsbury, Cian Shaffrey'
+copyright = '2013, 2014, Rich Wareham, Nick Kingsbury, Cian Shaffrey'
 
 # Project version and release are set in setup.py
 
@@ -194,7 +193,7 @@ latex_elements = {
 #'pointsize': '10pt',
 
 # Additional stuff for the LaTeX preamble.
-'preamble': u'''
+'preamble': '''
     \\usepackage{amsmath}
 ''',
 }
@@ -202,8 +201,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'dtcwt.tex', u'dtcwt Documentation',
-   u'Rich Wareham, Nick Kingsbury, Cian Shaffrey', 'manual'),
+  ('index', 'dtcwt.tex', 'dtcwt Documentation',
+   'Rich Wareham, Nick Kingsbury, Cian Shaffrey', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -232,8 +231,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'dtcwt', u'dtcwt Documentation',
-     [u'Rich Wareham, Nick Kingsbury, Cian Shaffrey'], 1)
+    ('index', 'dtcwt', 'dtcwt Documentation',
+     ['Rich Wareham, Nick Kingsbury, Cian Shaffrey'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -246,8 +245,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'dtcwt', u'dtcwt Documentation',
-   u'Rich Wareham, Nick Kingsbury, Cian Shaffrey', 'dtcwt', 'One line description of project.',
+  ('index', 'dtcwt', 'dtcwt Documentation',
+   'Rich Wareham, Nick Kingsbury, Cian Shaffrey', 'dtcwt', 'One line description of project.',
    'Miscellaneous'),
 ]
 

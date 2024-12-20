@@ -12,8 +12,6 @@ low-pass highpasses.
 
 """
 
-from __future__ import absolute_import
-
 __all__ = (
     'sample', 'sample_highpass',
     'rescale', 'rescale_highpass',

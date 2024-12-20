@@ -11,8 +11,6 @@ MATLAB scripts but shouldn't be used in new projects.
     module as aliases but they should not be used in new code.
 
 """
-from __future__ import absolute_import
-
 from dtcwt.defaults import DEFAULT_BIORT, DEFAULT_QSHIFT
 from dtcwt.numpy import Transform1d, Transform2d, Transform3d, Pyramid
 

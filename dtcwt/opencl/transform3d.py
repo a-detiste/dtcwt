@@ -1,8 +1,5 @@
-from __future__ import division
-
 import logging
 import numpy as np
-from six.moves import xrange
 
 from dtcwt.coeffs import biort as _biort, qshift as _qshift
 from dtcwt.defaults import DEFAULT_BIORT, DEFAULT_QSHIFT
@@ -113,7 +110,7 @@ class Transform3d(Transform3dNumPy):
             Yscale = [None,] * nlevels
 
         # level is 0-indexed
-        for level in xrange(nlevels):
+        for level in range(nlevels):
             # Transform
             if level == 0 and discard_level_1:
                 Yl = _level1_xfm_no_highpass(Yl, h0o, h1o, self.ext_mode)
@@ -197,7 +194,7 @@ class Transform3d(Transform3dNumPy):
 
         nlevels = len(Yh)
         # level is 0-indexed but interpreted starting from the *last* level
-        for level in xrange(nlevels):
+        for level in range(nlevels):
             # Transform
             if level == nlevels-1: # non-obviously this is the 'first' level
                 if Yh[-level-1] is None:
@@ -263,7 +260,7 @@ def _level1_xfm(X, h0o, h1o, ext_mode):
         work[s0a, s1a, s2a] = X
 
     # Loop over 2nd dimension extracting 2D slice from first and 3rd dimensions
-    for f in xrange(work.shape[1] >> 1):
+    for f in range(work.shape[1] >> 1):
         # extract slice
         y = work[s0a, f, x2a].T
 
@@ -274,7 +271,7 @@ def _level1_xfm(X, h0o, h1o, ext_mode):
         work[s0a, f, s2a] = colfilter(y, h0o).T
 
     # Loop over 3rd dimension extracting 2D slice from first and 2nd dimensions
-    for f in xrange(work.shape[2]):
+    for f in range(work.shape[2]):
         # Do odd top-level filters on rows.
         y1 = work[x0a, x1a, f].T
         y2 = np.vstack((colfilter(y1, h0o), colfilter(y1, h1o))).T
@@ -311,13 +308,13 @@ def _level1_xfm_no_highpass(X, h0o, h1o, ext_mode):
     out = np.zeros_like(X)
 
     # Loop over 2nd dimension extracting 2D slice from first and 3rd dimensions
-    for f in xrange(X.shape[1]):
+    for f in range(X.shape[1]):
         # extract slice
         y = X[:, f, :].T
         out[:, f, :] = colfilter(y, h0o).T
 
   # Loop over 3rd dimension extracting 2D slice from first and 2nd dimensions
-    for f in xrange(X.shape[2]):
+    for f in range(X.shape[2]):
         y = colfilter(out[:, :, f].T, h0o).T
         out[:, :, f] = colfilter(y, h0o)
 
@@ -359,7 +356,7 @@ def _level2_xfm(X, h0a, h0b, h1a, h1b, ext_mode):
     work = X
 
     # Loop over 2nd dimension extracting 2D slice from first and 3rd dimensions
-    for f in xrange(work.shape[1]):
+    for f in range(work.shape[1]):
         # extract slice (copy required because we overwrite the work array)
         y = work[:, f, :].T.copy()
 
@@ -368,7 +365,7 @@ def _level2_xfm(X, h0a, h0b, h1a, h1b, ext_mode):
         work[:, f, s2a] = coldfilt(y, h0b, h0a).T
 
     # Loop over 3rd dimension extracting 2D slice from first and 2nd dimensions
-    for f in xrange(work.shape[2]):
+    for f in range(work.shape[2]):
         # Do even Qshift filters on rows.
         y1 = work[:, :, f].T
         y2 = np.vstack((coldfilt(y1, h0b, h0a), coldfilt(y1, h1b, h1a))).T
@@ -431,14 +428,14 @@ def _level1_ifm(Yl, Yh, g0o, g1o):
     work[x0b, x1a, x2b] = c2cube(Yh[:,:,:,20:24])
     work[x0b, x1b, x2b] = c2cube(Yh[:,:,:,24:28])
 
-    for f in xrange(work.shape[2]):
+    for f in range(work.shape[2]):
         # Do odd top-level filters on rows.
         y = colfilter(work[:, x1a, f].T, g0o) + colfilter(work[:, x1b, f].T, g1o)
 
         # Do odd top-level filters on columns.
         work[s0a, s1a, f] = colfilter(y[:, x0a].T, g0o) + colfilter(y[:, x0b].T, g1o)
 
-    for f in xrange(work.shape[1]>>1):
+    for f in range(work.shape[1]>>1):
         # Do odd top-level filters on 3rd dim.
         y = work[s0a, f, :].T
         work[s0a, f, s2a] = (colfilter(y[x2a, :], g0o) + colfilter(y[x2b, :], g1o)).T
@@ -456,11 +453,11 @@ def _level1_ifm_no_highpass(Yl, g0o, g1o):
     # Create work area
     output = np.zeros_like(Yl)
 
-    for f in xrange(Yl.shape[2]):
+    for f in range(Yl.shape[2]):
         y = colfilter(Yl[:, :, f].T, g0o)
         output[:, :, f] = colfilter(y.T, g0o)
 
-    for f in xrange(Yl.shape[1]):
+    for f in range(Yl.shape[1]):
         y = output[:, f, :].T.copy()
         output[:, f, :] = colfilter(y, g0o)
 
@@ -491,14 +488,14 @@ def _level2_ifm(Yl, Yh, g0a, g0b, g1a, g1b, ext_mode, prev_level_size):
     work[s0b, s1a, s2b] = c2cube(Yh[:,:,:,20:24])
     work[s0b, s1b, s2b] = c2cube(Yh[:,:,:,24:28])
 
-    for f in xrange(work.shape[2]):
+    for f in range(work.shape[2]):
         # Do even Qshift filters on rows.
         y = colifilt(work[:, s1a, f].T, g0b, g0a) + colifilt(work[:, s1b, f].T, g1b, g1a)
 
           # Do even Qshift filters on columns.
         work[:, :, f] = colifilt(y[:, s0a].T, g0b, g0a) + colifilt(y[:,s0b].T, g1b, g1a)
 
-    for f in xrange(work.shape[1]):
+    for f in range(work.shape[1]):
         # Do even Qshift filters on 3rd dim.
         y = work[:, f, :].T
         work[:, f, :] = (colifilt(y[s2a, :], g0b, g0a) + colifilt(y[s2b, :], g1b, g1a)).T

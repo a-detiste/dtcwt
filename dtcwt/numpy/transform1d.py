@@ -1,9 +1,5 @@
-from __future__ import absolute_import
-
 import numpy as np
 import logging
-
-from six.moves import xrange
 
 from dtcwt.coeffs import biort as _biort, qshift as _qshift
 from dtcwt.defaults import DEFAULT_BIORT, DEFAULT_QSHIFT
@@ -11,7 +7,7 @@ from dtcwt.numpy.common import Pyramid
 from dtcwt.numpy.lowlevel import colfilter, coldfilt, colifilt
 from dtcwt.utils import as_column_vector, asfarray
 
-class Transform1d(object):
+class Transform1d:
     """
     An implementation of the 1D DT-CWT in NumPy.
 
@@ -90,7 +86,7 @@ class Transform1d(object):
             Yscale[0] = Lo
 
         # Levels 2 and above.
-        for level in xrange(1, nlevels):
+        for level in range(1, nlevels):
             # Check to see if height of Lo is divisable by 4, if not extend.
             if Lo.shape[0] % 4 != 0:
                 Lo = np.vstack((Lo[0,:], Lo, Lo[-1,:]))
